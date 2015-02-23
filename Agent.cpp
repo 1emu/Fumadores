@@ -22,6 +22,12 @@ int main(int argc, char** argv) {
 	srand(time(NULL) * id);
 
 
+	SemaphoreArray::create(PAPER_SEMAPHORE_ID);
+	SemaphoreArray::create(TOBACO_SEMAPHORE_ID);
+	SemaphoreArray::create(MATCHES_SEMAPHORE_ID);
+
+	Process::announce(PRODUCER_PROCESS_NAME, id, LIGHTBLUE, "ipcs succesfully created.");
+
 	SemaphoreArray* paper = SemaphoreArray::get(PAPER_SEMAPHORE_ID);
 	SemaphoreArray* tobaco = SemaphoreArray::get(TOBACO_SEMAPHORE_ID);
 	SemaphoreArray* matches = SemaphoreArray::get(MATCHES_SEMAPHORE_ID);
@@ -31,13 +37,15 @@ int main(int argc, char** argv) {
 
 		for(int j = 0; j < 3; j++){
 			paper->post();
+			sleep(Process::sleepTime());
 			tobaco->post();
+			sleep(Process::sleepTime());
 			matches->post();
 		}
 
-		sleep(Process::sleepTime());
-
 		Process::announce(processName, id, GREEN, "Refilled.");
+
+		sleep(Process::sleepTime());
 	}
 
 	Process::announce(PRODUCER_PROCESS_NAME, id, UNDERLINEDGREEN, "finished.");

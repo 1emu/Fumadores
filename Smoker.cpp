@@ -37,13 +37,14 @@ int main(int argc, char** argv) {
 		matches->wait();
 
 		string cigar =
-				"\n"
-				"                   (  )\n"+
-				"					 )(\n" +
-				" ________________  ( )\n" +
-				"()__)____________)))))  ";
+				"\n";
+		cigar += 	"                   (  )\n";
+		cigar +=	"                    )(\n" ;
+		cigar += 	" ________________  ( )\n" ;
+		cigar += 	"()__)____________)))))  ";
+		cigar +=    "\n";
 
-		Process::announce(CONSUMER_PROCESS_NAME, id, UNDERLINEDPURPLE, cigar.c_str());
+		Process::announce(CONSUMER_PROCESS_NAME, id, PURPLE, cigar.c_str());
 		Process::announce(CONSUMER_PROCESS_NAME, id, UNDERLINEDPURPLE, "waiting for input to smoke again...");
 
 	}
